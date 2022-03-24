@@ -1,0 +1,55 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.main{
+    width: 700px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.infoDiv, .title, .title > div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoDiv{
+    position: relative;
+}
+
+li{
+    list-style-type: none;
+}
+
+ul{
+    width: 250px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title > div{
+    width: 250px;
+}
+
+.infoDiv:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.2s ease all;
+}
+
+.shortName{
+    display: none;
+}
+
+.shortName:hover{
+    display: flex;
+}
