@@ -14,48 +14,79 @@ function Currencies({}){
     let gotData = useCurrencyData(date)
 
     let todaysData = Object.entries(gotData[0])
-    let lastDaysData = Object.entries(gotData[1])
+    let lastDaysData = gotData[1]
+    
+    let lastDaysInfo = {
+        dates: [],
+        values: []
+    };
 
-    console.log(lastDaysData)
+    if(showLastDays !== ''){
+        let dates = lastDaysData.map(el => {
+            return (el.Date).slice(0, 10)
+        });    
 
-    console.log(showLastDays)
+        let values = lastDaysData.map(el => {
+            return (el.Valute[showLastDays[0]].Value).toFixed(2)
+        });
+
+        lastDaysInfo.dates = dates;
+        lastDaysInfo.values = values;
+    }
+    console.log(lastDaysInfo)
 
     return (
-        <div className={styles.main}>
-            <div className={styles.title}>
-                    <p>Имя валюты</p>
-                <div>
-                    <p>Рублей</p>
-                    <p>Изменение %</p>
-                </div>
-            </div>
-            <hr />
-            {todaysData.map((el, i) => {
-                return (
+        <div className={styles.parent}>
+            <div className={styles.main}>
+                <div className={styles.title}>
+                        <p>Имя валюты</p>
                     <div>
-                        <Tooltip 
-                            followCursor="true" 
-                            hideOnClick="false" 
-                            html={
-                                <div>{el[1].CharCode}</div>
-                            }>
-                                <div key={i} className={styles.infoDiv} onClick={() => {
-                                    setShowLastData(el);
-                                }}>
-                                    <li>{el[1].Name}</li>
-                                    <ul>
-                                        <li>{(el[1].Value).toFixed(2)}</li>
-                                        <li>{(((el[1].Value - el[1].Previous) / el[1].Previous) * 100).toFixed(2)}</li>
-                                    </ul>
-                                </div>
-                        </Tooltip>
-                        {/* {lastDaysData.filter((e) => {
-                            return el[1].Valute == showLastDays[1].Valute
-                        })} */}
+                        <p>Рублей</p>
+                        <p>Изменение %</p>
                     </div>
-                )
-            })}
-            
+                </div>
+                <hr />
+                {todaysData.map((el, i) => {
+                    return (
+                        <div>
+                            <Tooltip 
+                                followCursor="true" 
+                                hideOnClick="false" 
+                                html={
+                                    <div>{el[1].CharCode}</div>
+                                }>
+                                    <div key={i} className={styles.infoDiv} onClick={() => {
+                                        setShowLastData(el);
+                                    }}>
+                                        <li>{el[1].Name}</li>
+                                        <ul>
+                                            <li>{(el[1].Value).toFixed(2)}</li>
+                                            <li>{(((el[1].Value - el[1].Previous) / el[1].Previous) * 100).toFixed(2)}</li>
+                                        </ul>
+                                    </div>
+                            </Tooltip>
+                        </div>
+                    )
+                })}
+            </div>
+            {showLastDays !== '' 
+            ? <div className={styles.lastDaysDataMain}>
+                <div className={styles.title}>
+                        <li>Дата</li>
+                        <li>{showLastDays[0]}</li>
+                        <li>Рублей</li>
+                </div>
+                <hr />
+                {lastDaysInfo.dates.map((el, i) => {
+                        return (
+                            <div className={styles.lastDaysData}>
+                                <li>{el}</li>
+                                <li>{lastDaysInfo.values[i]}</li>
+                            </div>
+                        )
+                })}
+            </div> 
+            : ""}
         </div>
     )
 }

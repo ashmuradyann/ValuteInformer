@@ -6,11 +6,6 @@ function useCurrencyData(value){
     const [todays, setTodays] = useState('');
     const [lastDays, setLastDays] = useState('');
 
-    // var data = {
-    //     todays: [],
-    //     lastDays: []
-    // }
-
     useEffect(() => {
         axios.get("https://www.cbr-xml-daily.ru/daily_json.js")
                 .then(results => {
