@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ValuteInformer/static/css/main.d405af71.css",
-    "main.js": "/ValuteInformer/static/js/main.6c5a61be.js",
+    "main.js": "/ValuteInformer/static/js/main.b5e3f0c4.js",
     "static/js/787.28cb0dcd.chunk.js": "/ValuteInformer/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/ValuteInformer/index.html",
     "main.d405af71.css.map": "/ValuteInformer/static/css/main.d405af71.css.map",
-    "main.6c5a61be.js.map": "/ValuteInformer/static/js/main.6c5a61be.js.map",
+    "main.b5e3f0c4.js.map": "/ValuteInformer/static/js/main.b5e3f0c4.js.map",
     "787.28cb0dcd.chunk.js.map": "/ValuteInformer/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d405af71.css",
-    "static/js/main.6c5a61be.js"
+    "static/js/main.b5e3f0c4.js"
   ]
 }
