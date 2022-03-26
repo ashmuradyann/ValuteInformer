@@ -9,6 +9,7 @@ function App() {
       <Currencies />
     </div>
   );
+
 }
 
 export default App;

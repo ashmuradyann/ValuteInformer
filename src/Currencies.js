@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 
@@ -6,25 +7,18 @@ import useCurrencyData from './useCurrencyData';
 
 import styles from './styles.module.css';
 
-function Currencies(){
+function Currencies({}){
+
+    const [showLastDays, setShowLastData] = useState('')
 
     let gotData = useCurrencyData(date)
 
-    console.log(gotData[0])
+    let todaysData = Object.entries(gotData[0])
+    let lastDaysData = Object.entries(gotData[1])
 
-    // let currentData = gotData[0][gotData[0].length - 1] //gotData[0].length - 1
+    console.log(lastDaysData)
 
-    // let dates = gotData[1].map(el => {
-    //     return el;
-    // })
-
-    // let lastDaysData = gotData[0].map(el => {
-    //     return el[1].map(el => {
-    //         return el.Value
-    //     })
-    // })
-
-    // console.log(currentData)
+    console.log(showLastDays)
 
     return (
         <div className={styles.main}>
@@ -36,29 +30,32 @@ function Currencies(){
                 </div>
             </div>
             <hr />
-            {(gotData[0][gotData[0].length - 1]).map((el, i) => {
+            {todaysData.map((el, i) => {
                 return (
                     <div>
-                        {el.Name}
-                    {/* <Tooltip 
-                        inertia="true" 
-                        followCursor="true" 
-                        hideOnClick="false" 
-                        animation="shift" 
-                        html={
-                            <div>{el[1].CharCode}</div>
-                        }>
-                            <div key={i} className={styles.infoDiv} >
-                                <li>{el.Name}</li>
-                                <ul>
-                                    <li>{(el.Value).toFixed(2)}</li>
-                                    <li>{(((el.Value - el.Previous) / el.Previous) * 100).toFixed(2)}</li>
-                                </ul>
-                            </div>
-                    </Tooltip> */}
+                        <Tooltip 
+                            followCursor="true" 
+                            hideOnClick="false" 
+                            html={
+                                <div>{el[1].CharCode}</div>
+                            }>
+                                <div key={i} className={styles.infoDiv} onClick={() => {
+                                    setShowLastData(el);
+                                }}>
+                                    <li>{el[1].Name}</li>
+                                    <ul>
+                                        <li>{(el[1].Value).toFixed(2)}</li>
+                                        <li>{(((el[1].Value - el[1].Previous) / el[1].Previous) * 100).toFixed(2)}</li>
+                                    </ul>
+                                </div>
+                        </Tooltip>
+                        {/* {lastDaysData.filter((e) => {
+                            return el[1].Valute == showLastDays[1].Valute
+                        })} */}
                     </div>
                 )
             })}
+            
         </div>
     )
 }

@@ -3,31 +3,44 @@ import axios from 'axios';
 
 function useCurrencyData(value){
 
-    const [resultData, setResultData] = useState([]);
+    const [todays, setTodays] = useState('');
+    const [lastDays, setLastDays] = useState('');
+
+    // var data = {
+    //     todays: [],
+    //     lastDays: []
+    // }
+
+    useEffect(() => {
+        axios.get("https://www.cbr-xml-daily.ru/daily_json.js")
+                .then(results => {
+                    setTodays(results.data.Valute)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+    }, [])
 
     useEffect(() => {
 
-        let data = [];
-        let dates = [];
+        let data = []
 
         for(let i = 0; i < 10; i++){
             axios.get(`https://www.cbr-xml-daily.ru/archive/${value[i]}/daily_json.js`)
                 .then(results => {
-                    data.push(results.data.Valute)
-                    dates.push(results.data.Date)
-                    // data.push(Object.values(Object.entries(results.data.Valute)))
-                    // dates.push(results.data.Date)
+                    data.push(results.data)
                 })
                 .catch(err => {
                     console.log(err)
                 })
         }
 
-        setResultData([data, dates])
-            
-    }, []);
+        setLastDays(data)
 
-    return resultData;
+    }, [value]);
+
+    return [todays, lastDays];
+
 }
 
 export default useCurrencyData;
