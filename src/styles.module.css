@@ -29,6 +29,8 @@ body{
 
 .infoDiv{
     position: relative;
+    cursor: pointer;
+    margin: 5px 0;
 }
 
 li{

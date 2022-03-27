@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function Currencies({}){
 
     const [showLastDays, setShowLastData] = useState('')
+    
 
     let gotData = useCurrencyData(date)
 
@@ -33,7 +34,6 @@ function Currencies({}){
         lastDaysInfo.dates = dates;
         lastDaysInfo.values = values;
     }
-    console.log(lastDaysInfo)
 
     return (
         <div className={styles.parent}>
@@ -73,13 +73,14 @@ function Currencies({}){
             ? <div className={styles.lastDaysDataMain}>
                 <div className={styles.title}>
                         <li>Дата</li>
+                        <li>{showLastDays[1].Nominal}</li>
                         <li>{showLastDays[0]}</li>
                         <li>Рублей</li>
                 </div>
                 <hr />
                 {lastDaysInfo.dates.map((el, i) => {
                         return (
-                            <div className={styles.lastDaysData}>
+                            <div key={i} className={styles.lastDaysData}>
                                 <li>{el}</li>
                                 <li>{lastDaysInfo.values[i]}</li>
                             </div>
