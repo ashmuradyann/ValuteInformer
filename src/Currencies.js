@@ -4,15 +4,14 @@ import date from './date.js';
 import useCurrencyData from './useCurrencyData';
 
 import LastDays from './LastDays.js';
+import Todays from './Todays.js';
 
 import styles from './styles.module.css';
-import Todays from './Todays.js';
 
 function Currencies({}){
 
     const [showLastDays, setShowLastData] = useState('')
     
-
     let gotData = useCurrencyData(date)
 
     let todaysData = Object.entries(gotData[0])
@@ -25,11 +24,15 @@ function Currencies({}){
 
     if(showLastDays !== ''){
         let dates = lastDaysData.map(el => {
-            return (el.Date).slice(0, 10)
+            return (el.Date).slice(0, 10).replaceAll("-", ".")
         });    
 
         let values = lastDaysData.map(el => {
-            return (el.Valute[showLastDays[0]].Value).toFixed(2)
+            if(typeof el.Valute[showLastDays[0]].Value === "number"){
+                return (el.Valute[showLastDays[0]].Value).toFixed(2)
+            }
+
+            return el.Valute[showLastDays[0]].Value
         });
 
         lastDaysInfo.dates = dates;
