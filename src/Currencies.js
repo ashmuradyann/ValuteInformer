@@ -38,7 +38,9 @@ function Currencies({}){
 
     return (
         <div className={styles.parent}>
-            <Todays todaysData={todaysData} setShowLastData={setShowLastData} />
+            <div>
+                <Todays todaysData={todaysData} setShowLastData={setShowLastData} />
+            </div>
             <LastDays showLastDays={showLastDays} lastDaysInfo={lastDaysInfo} />
         </div>
     )
