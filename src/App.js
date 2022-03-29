@@ -1,6 +1,6 @@
-import Currencies from './Currencies.js';
+import Currencies from './components/Currencies.js';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
 

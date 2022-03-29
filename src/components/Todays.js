@@ -1,9 +1,9 @@
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 
-import styles from './styles.module.css';
+import styles from '../styles/styles.module.css';
 
-function Todays({ todaysData, setShowLastData }){
+const Todays = ({ todaysData, setShowLastData }) => {
 
     return (
         <div className={styles.main}>
@@ -14,10 +14,9 @@ function Todays({ todaysData, setShowLastData }){
                     <p>Изменение %</p>
                 </div>
             </div>
-            <hr />
             {todaysData.map((el, i) => {
                 return (
-                    <div>
+                    <>
                         <Tooltip 
                             followCursor="true" 
                             hideOnClick="false" 
@@ -27,14 +26,14 @@ function Todays({ todaysData, setShowLastData }){
                                 <div key={i} className={styles.infoDiv} onClick={() => {
                                     setShowLastData(el);
                                 }}>
-                                    <li>{el[1].Name}</li>
+                                    <p>{el[1].Name}</p>
                                     <ul>
                                         <li>{(el[1].Value).toFixed(2)}</li>
                                         <li>{(((el[1].Value - el[1].Previous) / el[1].Previous) * 100).toFixed(2)}</li>
                                     </ul>
                                 </div>
                         </Tooltip>
-                    </div>
+                    </>
                 )
             })}
         </div>

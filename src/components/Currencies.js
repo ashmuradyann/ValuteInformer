@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
-import date from './date.js';
-import useCurrencyData from './useCurrencyData';
+import date from '../api/date.js';
+import useCurrencyData from '../api/useCurrencyData';
 
 import LastDays from './LastDays.js';
 import Todays from './Todays.js';
 
-import styles from './styles.module.css';
+import styles from '../styles/styles.module.css';
 
-function Currencies({}){
+function Currencies(){
 
     const [showLastDays, setShowLastData] = useState('')
     
-    let gotData = useCurrencyData(date)
+    const gotData = useCurrencyData(date)
 
-    let todaysData = Object.entries(gotData[0])
-    let lastDaysData = gotData[1]
+    const todaysData = Object.entries(gotData[0])
+    const lastDaysData = gotData[1]
     
     let lastDaysInfo = {
         dates: [],
@@ -23,11 +23,11 @@ function Currencies({}){
     };
 
     if(showLastDays !== ''){
-        let dates = lastDaysData.map(el => {
+        let dates = lastDaysData?.map(el => {
             return (el.Date).slice(0, 10).replaceAll("-", ".")
         });    
 
-        let values = lastDaysData.map(el => {
+        let values = lastDaysData?.map(el => {
             if(typeof el.Valute[showLastDays[0]].Value === "number"){
                 return (el.Valute[showLastDays[0]].Value).toFixed(2)
             }
@@ -41,9 +41,7 @@ function Currencies({}){
 
     return (
         <div className={styles.parent}>
-            <div>
-                <Todays todaysData={todaysData} setShowLastData={setShowLastData} />
-            </div>
+            <Todays todaysData={todaysData} setShowLastData={setShowLastData} />
             <LastDays showLastDays={showLastDays} lastDaysInfo={lastDaysInfo} />
         </div>
     )
